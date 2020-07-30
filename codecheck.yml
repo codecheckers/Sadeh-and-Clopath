@@ -1,0 +1,40 @@
+---
+version: https://codecheck.org.uk/spec/config/1.0
+
+paper:
+  title: >
+    Patterned perturbation of inhibition can reveal the dynamical structure of neural processing
+  authors:
+    - name: Sadra Sadeh
+      ORCID: https://orcid.org/0000-0001-8159-5461
+    - name: Claudia Clopath
+      ORCID: https://orcid.org/0000-0003-4507-8648
+  reference: >
+    eLife (2020) 9:e52757 
+    https://elifesciences.org/articles/52757
+
+manifest:
+  - file: codecheck/figures/GeneralActivity_SpecPert__1.png
+    comment: manuscript Figure 2A Bottom
+  - file: codecheck/figures/SpecActivity_SpecPert__1.png
+    comment: manuscript Figure 2B Bottom
+  - file: codecheck/figures/PertChange_SpecPert__1.png
+    comment: manuscript Figure 2C Bottom
+  - file: codecheck/figures/SpikingActivity.png
+    comment: manuscript Figure 5A
+  - file: codecheck/figures/SpikingNet_SpecActivity_SpecPert__inh.png
+    comment: manuscript Figure 5B Right
+  - file: codecheck/figures/SpikingNet_PertChange_SpecPert.png
+    comment: manuscript Figure 5C
+
+codechecker:
+  - name: Iain Davies
+    ORCID: 0000-0002-5361-6285
+
+summary: >
+  Some of the original MATLAB code was provided on ModelDB. This code was successfully 
+  rerun and reproduced some of the figures in the original paper. However this was a small subset of all the figures in the paper.
+repository: https://github.com/codecheckers/Sadeh-and-Clopath
+check_time: "2020-07-28 10:00:00"
+certificate: 2020-014
+report: https://doi.org/10.5281/zenodo.3967326

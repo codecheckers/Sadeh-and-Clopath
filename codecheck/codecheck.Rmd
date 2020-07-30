@@ -1,0 +1,132 @@
+---
+output:
+  pdf_document:
+    toc: false
+    includes:
+       in_header: codecheck-preamble.sty
+  html_document:
+    self_contained: false
+    toc: true
+    toc_float: false
+---
+
+```{r rsetup,eval=TRUE,include=FALSE}
+require(codecheck)
+require(knitr)
+require(rprojroot)
+require(yaml)
+require(xtable)
+require(tibble)
+require(readr)
+options(width=60)
+opts_chunk$set(cache=FALSE)
+
+root = find_root("codecheck.yml")
+```
+
+```{r codecheck_logo, echo=FALSE,results='asis'}
+latex_codecheck_logo()
+```
+
+```{r manifest, eval=TRUE, include=FALSE}
+metadata = codecheck_metadata(root)
+manifest = metadata$manifest
+
+dest_dir = file.path(root, "codecheck", "outputs")
+## Create the outputs directory if missing
+if ( !dir.exists(dest_dir) ) {
+  dir.create(dest_dir)
+}
+
+manifest_df = copy_manifest_files(root, metadata,
+                                  dest_dir, keep_full_path=FALSE)
+```
+
+---
+title: `r paste("CODECHECK certificate", metadata$certificate)`
+subtitle: `r codecheck:::as_latex_url(metadata$report)`
+---
+
+```{r summary_metadata, echo=FALSE, results='asis'}
+latex_summary_of_metadata(metadata)
+```
+
+```{r summary_manifest, echo=FALSE, results='asis'}
+latex_summary_of_manifest(metadata, manifest_df, root)
+```
+
+
+# Summary
+
+The original authors provided code to reproduce six figures which was down straightforwardly. However this was a small subset of the total figures in the paper so this is only a partially successful codecheck.
+
+\clearpage
+
+# CODECHECKER notes
+
+The original author provided some of the original MATLAB code on ModelDB here: https://senselab.med.yale.edu/ModelDB/showmodel.cshtml?model=259620#tabs-1. I dowloaded the zip file, unzipped it then ran the MATLAB code in a MATLAB console in the way described in the README.
+The code took a total of around 30 seconds on a DAMTP workstation, and produced 6 figures that were automatically saved into the root directory. I then saved these into the codecheck/figures folder. These figures reproduced extremely well 6 figures that were in the original paper. However, given there are over 100 figures in the paper this was a relatively small subset of the total figures.
+
+\setcounter{table}{0}
+\setcounter{figure}{0}
+\captionsetup[table]{labelformat=addC}
+\captionsetup[figure]{labelformat=addC}
+
+\clearpage
+
+```{r, echo=FALSE, fig.cap=manifest_df[1:6,"comment"]}
+# TODO turn into a loop 
+knitr::include_graphics(manifest_df[1, "dest"])
+cat('\n\n')
+knitr::include_graphics(manifest_df[2, "dest"])
+cat('\n\n')
+knitr::include_graphics(manifest_df[3, "dest"])
+cat('\n\n')
+knitr::include_graphics(manifest_df[4, "dest"])
+cat('\n\n')
+knitr::include_graphics(manifest_df[5, "dest"])
+cat('\n\n')
+knitr::include_graphics(manifest_df[6, "dest"])
+```
+
+\clearpage
+
+
+
+## Acknowledgements
+
+I would like to thank Dr Bhatt and his team for promptly answering any
+queries I had with this reproduction.  CODECHECK is financially
+supported by the Mozilla foundation.
+
+
+# Citing this document
+
+```{r, results='asis',echo=FALSE}
+cite_certificate(metadata)
+```
+
+# About CODECHECK
+
+This certificate confirms that the codechecker could independently
+reproduce the results of a computational analysis given the data and
+code from a third party.  A CODECHECK does not check whether the
+original computation analysis is correct.  However, as all materials
+required for the reproduction are freely available by following the
+links in this document, the reader can then study for themselves the
+code and data.
+
+
+# About this document
+
+This document was created using [R Markdown](https://rmarkdown.rstudio.com/) using the [`codecheck`](https://github.com/codecheckers/codecheck) R package.
+`make codecheck.pdf` will regenerate the report file.
+
+```{r}
+sessionInfo()
+```
+
+```{r, include=FALSE, eval=FALSE}
+# render this document in RStudio
+rmarkdown::render("codecheck.Rmd", output_format = "pdf_document") 
+```
