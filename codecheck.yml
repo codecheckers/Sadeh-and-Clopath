@@ -6,12 +6,10 @@ paper:
     Patterned perturbation of inhibition can reveal the dynamical structure of neural processing
   authors:
     - name: Sadra Sadeh
-      ORCID: https://orcid.org/0000-0001-8159-5461
+      ORCID: 0000-0001-8159-5461
     - name: Claudia Clopath
-      ORCID: https://orcid.org/0000-0003-4507-8648
-  reference: >
-    eLife (2020) 9:e52757 
-    https://elifesciences.org/articles/52757
+      ORCID: 0000-0003-4507-8648
+  reference: https://doi.org/10.7554/eLife.52757
 
 manifest:
   - file: codecheck/figures/GeneralActivity_SpecPert__1.png
